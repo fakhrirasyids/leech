@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'com.google.devtools.ksp'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.fakhrirasyids.leech'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "BASE_URL", "\"http://localhost/\"")
+    }
+    buildFeatures {
+        buildConfig true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    packagingOptions {
+        excludes -= "/META-INF/*.kotlin_module"
+    }
+}
+
+dependencies {
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
+
+    // Work Manager
+    implementation "androidx.work:work-runtime-ktx:2.9.1"
+
+    // OKHttp & Logging Interceptor
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.9"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9"
+
+    // Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+
+    // Serialization
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1'
+
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = "com.github.fakhrirasyids"
+                artifactId = "leech"
+                version = "0.0.1"
+            }
+        }
+    }
+}
