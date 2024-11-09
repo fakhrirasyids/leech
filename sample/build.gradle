@@ -49,7 +49,14 @@ android {
 }
 
 dependencies {
-    implementation(project(":leech"))
+    // Leech
+    implementation 'com.github.fakhrirasyids:leech:0.0.1'
+
+    // Koin
+    implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.0.0"))
+    implementation("io.insert-koin:koin-core")
+    implementation("io.insert-koin:koin-android:4.0.0")
+    implementation("io.insert-koin:koin-androidx-compose:4.0.0")
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
