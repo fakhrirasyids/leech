@@ -14,6 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.fakhrirasyids.leech.Leech
 import com.fakhrirasyids.leech.utils.Constants
 import com.fakhrirasyids.leech.utils.ConverterUtil
+import com.fakhrirasyids.leech.utils.FileDownloadStatus
 
 /**
  * LeechNotificationReceiver is a BroadcastReceiver that handles notifications related to
@@ -74,7 +75,7 @@ internal class LeechNotificationReceiver : BroadcastReceiver() {
         )
 
         val contentText = when (action) {
-            Constants.FileDownloadStatus.DOWNLOAD_COMPLETE.name -> StringBuilder(
+            FileDownloadStatus.DOWNLOAD_COMPLETE.name -> StringBuilder(
                 "Download successful (${
                     ConverterUtil.getFormattedFileSize(
                         totalLength
@@ -82,7 +83,7 @@ internal class LeechNotificationReceiver : BroadcastReceiver() {
                 })."
             )
 
-            Constants.FileDownloadStatus.DOWNLOAD_FAILED.name -> "Download failed."
+            FileDownloadStatus.DOWNLOAD_FAILED.name -> "Download failed."
             else -> "Download status unknown."
         }
 

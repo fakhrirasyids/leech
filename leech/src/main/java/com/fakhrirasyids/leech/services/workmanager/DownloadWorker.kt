@@ -12,6 +12,7 @@ import com.fakhrirasyids.leech.domain.models.LeechDownloadEntity
 import com.fakhrirasyids.leech.services.notifications.LeechNotificationManager
 import com.fakhrirasyids.leech.utils.Constants
 import com.fakhrirasyids.leech.utils.ConverterUtil
+import com.fakhrirasyids.leech.utils.FileDownloadStatus
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import java.io.File
@@ -75,7 +76,7 @@ internal class DownloadWorker(
         val currentDownload = localDataSource.getDownloadItem(downloadEntity.id).firstOrNull()
             ?: return
 
-        if (currentDownload.downloadStatus == Constants.FileDownloadStatus.DOWNLOAD_COMPLETE.name) {
+        if (currentDownload.downloadStatus == FileDownloadStatus.DOWNLOAD_COMPLETE.name) {
             leechNotificationManager.postSuccessfulDownloadNotification(currentDownload.fileByteSize)
             return
         }
@@ -104,7 +105,7 @@ internal class DownloadWorker(
             is DownloadState.Downloading -> {
                 val updatedEntity = downloadEntity.copy(
                     fileByteSize = downloadState.totalLength,
-                    downloadStatus = Constants.FileDownloadStatus.DOWNLOAD_LOADING.name
+                    downloadStatus = FileDownloadStatus.DOWNLOAD_LOADING.name
                 )
                 localDataSource.updateDownloadItem(updatedEntity)
                 setForeground(
@@ -118,7 +119,7 @@ internal class DownloadWorker(
             is DownloadState.Success -> {
                 val completedEntity = downloadEntity.copy(
                     fileByteSize = downloadState.totalLength,
-                    downloadStatus = Constants.FileDownloadStatus.DOWNLOAD_COMPLETE.name
+                    downloadStatus = FileDownloadStatus.DOWNLOAD_COMPLETE.name
                 )
                 localDataSource.updateDownloadItem(completedEntity)
                 leechNotificationManager.postSuccessfulDownloadNotification(downloadState.totalLength)
@@ -139,7 +140,7 @@ internal class DownloadWorker(
      */
     private suspend fun handleDownloadError(downloadEntity: LeechDownloadEntity) {
         val failedEntity = downloadEntity.copy(
-            downloadStatus = Constants.FileDownloadStatus.DOWNLOAD_FAILED.name
+            downloadStatus = FileDownloadStatus.DOWNLOAD_FAILED.name
         )
         localDataSource.updateDownloadItem(failedEntity)
         leechNotificationManager.postFailedDownloadNotification()

@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.work.ForegroundInfo
 import com.fakhrirasyids.leech.utils.Constants
+import com.fakhrirasyids.leech.utils.FileDownloadStatus
 import com.fakhrirasyids.leech.utils.NotificationUtils.removeNotification
 
 /**
@@ -106,7 +107,7 @@ internal class LeechNotificationManager(
      */
     fun postSuccessfulDownloadNotification(totalLength: Long) {
         sendDownloadStatusBroadcast(
-            Constants.FileDownloadStatus.DOWNLOAD_COMPLETE.name,
+            FileDownloadStatus.DOWNLOAD_COMPLETE.name,
             totalLength
         )
     }
@@ -115,7 +116,7 @@ internal class LeechNotificationManager(
      * Posts a notification indicating a failed download and sends a broadcast.
      */
     fun postFailedDownloadNotification() {
-        sendDownloadStatusBroadcast(Constants.FileDownloadStatus.DOWNLOAD_FAILED.name)
+        sendDownloadStatusBroadcast(FileDownloadStatus.DOWNLOAD_FAILED.name)
     }
 
     /**

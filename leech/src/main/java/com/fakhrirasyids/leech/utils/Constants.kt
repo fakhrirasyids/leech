@@ -18,13 +18,4 @@ internal object Constants {
 
     // Notification Status
     const val NOTIFICATION_CANCEL = "leech_notification_cancel"
-
-
-    // File Status
-    enum class FileDownloadStatus {
-        DOWNLOAD_COMPLETE,
-        DOWNLOAD_FAILED,
-        DOWNLOAD_QUEUED,
-        DOWNLOAD_LOADING
-    }
 }
