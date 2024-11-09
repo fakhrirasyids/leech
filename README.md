@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/fakhrirasyids/leech.svg)](https://jitpack.io/#fakhrirasyids/leech)
 
-Leech is a lightweight, Kotlin-based library designed to streamline background file downloads in Android applications. Built with CoroutineWorker, Kotlin Flow, Room, and Retrofit, Leech efficiently handles multiple download tasks while providing seamless updates and notification management for each download. 
+Leech is a lightweight, open-source Kotlin-based library designed to streamline background file downloads in Android applications. Built with CoroutineWorker, Kotlin Flow, Room, and Retrofit, Leech efficiently handles multiple download tasks while providing seamless updates and notification management for each download. 
 
 ## How to add
 
@@ -107,7 +107,9 @@ leech.cancelDownloadItem(leechId = // downloadId)
 
 ## Contribute to the Project
 
-Feedback, bug reports, and contributions to Leech are always welcome! Pull requests and issue reports are greatly appreciated. 😋🙌
+Leech is an open-source project, and contributions are always welcome! Whether you want to report an issue, request a new feature, or submit a pull request, your contributions help make the library even better. 😋🙌
+
+Feel free to create an issue or open a pull request on GitHub.
 
 ## License
 
